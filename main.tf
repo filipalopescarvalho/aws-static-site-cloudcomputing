@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"  # or any compatible version you want
+      version = "~> 5.0"
     }
   }
 }
@@ -10,7 +10,6 @@ terraform {
 provider "aws" {
   region = var.aws_region
 }
-
 
 resource "aws_s3_bucket" "static_site" {
   bucket = var.bucket_name
@@ -49,14 +48,15 @@ resource "aws_s3_bucket_policy" "static_site" {
 }
 
 resource "aws_s3_object" "index" {
-  bucket = aws_s3_bucket.static_site.id
-  key    = "index.html"
-  source = "index.html"
+  bucket       = aws_s3_bucket.static_site.id
+  key          = "index.html"
+  source       = "index.html"
   content_type = "text/html"
 }
+
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.static_site.website_endpoint
+  domain_name = aws_s3_bucket.static_site.bucket_regional_domain_name
     origin_id   = "S3-static-site"
 
     custom_origin_config {
@@ -100,4 +100,9 @@ resource "aws_cloudfront_distribution" "cdn" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+}
+
+output "cloudfront_domain_name" {
+  value       = aws_cloudfront_distribution.cdn.domain_name
+  description = "The domain name of the CloudFront distribution"
 }

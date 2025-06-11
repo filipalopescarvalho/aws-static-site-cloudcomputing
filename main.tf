@@ -52,7 +52,9 @@ resource "aws_s3_object" "index" {
   key          = "index.html"
   source       = "index.html"
   content_type = "text/html"
+  etag         = filemd5("index.html")
 }
+
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {

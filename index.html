@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hello, World!</title>
   <style>
     body {
@@ -12,21 +12,139 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
       color: #333;
+      padding: 20px;
+      box-sizing: border-box;
     }
+
+    /* Animation for title */
+    @keyframes slide-left-to-right {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      50% {
+        transform: translateX(50vw);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100vw);
+        opacity: 0;
+      }
+    }
+
     h1 {
       font-size: 3rem;
       color: #2c3e50;
+      white-space: nowrap;
+      position: relative;
+      animation: slide-left-to-right 8s linear infinite;
+      margin-bottom: 1rem;
     }
-    p {
+
+    p.subtitle {
       font-size: 1.2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      max-width: 400px;
+    }
+
+    /* Feature section */
+    .features {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 800px;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      width: 180px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #34495e;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .photos {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 800px;
+    }
+
+    .photo {
+      background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+      width: 180px;
+      height: 120px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      user-select: none;
+      cursor: default;
+      text-align: center;
+      padding: 10px;
     }
   </style>
 </head>
 <body>
   <h1>Hello, World!</h1>
-  <p>Cloud Architecture for Hosting a Simple Webpage on AWS</p>
+  <p class="subtitle">Cloud Architecture for Hosting a Simple Webpage on AWS</p>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">☁️</div>
+      <div class="feature-title">Scalable</div>
+      <div class="feature-desc">Automatically adjusts to traffic demands.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Secure</div>
+      <div class="feature-desc">Built with AWS security best practices.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Fast Delivery</div>
+      <div class="feature-desc">CloudFront CDN delivers content quickly worldwide.</div>
+    </div>
+  </div>
+
+  <div class="photos">
+    <div class="photo">Abstract Cloud Diagram</div>
+    <div class="photo">AWS Infrastructure</div>
+    <div class="photo">Static Site Hosting</div>
+  </div>
 </body>
 </html>
